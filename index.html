@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Monkeys Harare — Branded Audio Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Inter, sans-serif;
+    background:#0b0b0b;
+    color:#f5f5f5;
+    min-height:100vh;
+    user-select:none;
+    overflow-x:hidden;
+}
+.overlay-lock{
+    position:fixed;inset:0;pointer-events:none;
+    background:radial-gradient(circle at center, rgba(255,255,255,0.02), rgba(0,0,0,0.35));
+    z-index:2;
+}
+.header{
+    padding:90px 24px 70px;
+    text-align:center;
+    position:relative;
+}
+.header::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, transparent 60%, rgba(207,162,74,0.18) 85%, rgba(207,162,74,0.35) 100%);
+    z-index:0;
+}
+.header > *{position:relative; z-index:1;}
+.header h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:42px;
+    margin:0;
+    letter-spacing:2px;
+}
+.header p{
+    margin-top:10px;
+    color:#bbb;
+    font-size:15px;
+}
+.container{
+    max-width:1200px;
+    margin:0 auto;
+    padding:40px 20px 100px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:28px;
+}
+.card{
+    background:linear-gradient(180deg,#141414,#0f0f0f);
+    border-radius:22px;
+    padding:30px;
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 25px 60px rgba(0,0,0,0.75);
+    position:relative;
+    overflow:hidden;
+}
+.card::before{
+    content:"";
+    position:absolute;
+    inset:-20px;
+    background:
+      radial-gradient(circle at bottom center, rgba(255,170,90,0.25), transparent 45%),
+      radial-gradient(circle at top center, rgba(255,200,120,0.10), transparent 50%),
+      radial-gradient(circle at left center, rgba(255,180,120,0.12), transparent 55%),
+      radial-gradient(circle at right center, rgba(255,180,120,0.12), transparent 55%);
+    z-index:0;
+    animation:ambientPulse 8s ease-in-out infinite;
+}
+.card > *{position:relative; z-index:1;}
+.card::after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.03),transparent);
+    opacity:0;transition:.6s;
+}
+.card:hover::after{opacity:1}
+.mode{
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#aaa;
+}
+.title{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:20px;
+    margin:6px 0 8px;
+}
+.desc{
+    font-size:13px;
+    color:#bbb;
+    line-height:1.5;
+}
+.controls{
+    margin-top:18px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+.play{
+    width:54px;height:54px;border-radius:50%;
+    border:1px solid rgba(255,255,255,0.3);
+    background:rgba(0,0,0,0.6);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:18px;
+}
+.progress-wrap{
+    flex:1;height:6px;background:#222;border-radius:6px;overflow:hidden;
+}
+.progress{
+    height:100%;width:0%;background:linear-gradient(90deg,#cfa24a,#fff);
+}
+.footer{
+    text-align:center;
+    padding:40px 20px;
+    font-size:11px;
+    color:#777;
+    border-top:1px solid rgba(255,255,255,0.08);
+}
+@keyframes ambientPulse{
+  0%{opacity:0.6; filter:blur(0px)}
+  50%{opacity:1; filter:blur(2px)}
+  100%{opacity:0.6; filter:blur(0px)}
+}
+@keyframes heroGlow{
+  0%{box-shadow:0 40px 80px rgba(207,162,74,0.25), 0 20px 40px rgba(0,0,0,0.9)}
+  50%{box-shadow:0 50px 120px rgba(255,180,120,0.45), 0 25px 50px rgba(0,0,0,0.95)}
+  100%{box-shadow:0 40px 80px rgba(207,162,74,0.25), 0 20px 40px rgba(0,0,0,0.9)}
+}
+.hero-base{
+    animation:heroGlow 10s ease-in-out infinite;
+}
+#ws-whatsapp-btn{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#25d366,#128c7e);
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:9999;
+    transition:all 0.3s ease;
+}
+#ws-whatsapp-btn:hover{
+    transform:scale(1.1);
+    box-shadow:0 15px 45px rgba(0,0,0,0.6), 0 0 15px rgba(37,211,102,0.7);
+}
+#ws-whatsapp-btn img{
+    width:40px;
+    height:40px;
+}
+</style>
+</head>
+<body>
+<div class="overlay-lock"></div>
+<div class="header">
+<h1>Three Monkeys Harare</h1>
+<p>Branded Audio Identity Demo · Curated Playlist Experience · Proposal Presentation</p>
+<div class="hero-base" style="margin:60px auto 0;max-width:520px;height:80px;border-radius:24px;
+background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
+box-shadow:0 40px 80px rgba(207,162,74,0.45), 0 20px 40px rgba(0,0,0,0.9);"></div>
+</div>
+
+<div class="container">
+<!-- 12 Tracks -->
+<div class="card"><div class="mode">Arrival Mode</div><div class="title">Monkey Arrival</div><div class="desc">Warm and inviting first impression for guests.</div>
+<div class="controls"><div class="play" onclick="toggle('a1',this)">▶</div><div class="progress-wrap"><div class="progress" id="p1"></div></div></div>
+<audio id="a1" src="/SadzaWelcome.mp3"></audio></div>
+
+<div class="card"><div class="mode">City Vibe Mode</div><div class="title">Greendale Walk-In</div><div class="desc">Street energy and community warmth.</div>
+<div class="controls"><div class="play" onclick="toggle('a2',this)">▶</div><div class="progress-wrap"><div class="progress" id="p2"></div></div></div>
+<audio id="a2" src="/BelgraviaBreeze.mp3"></audio></div>
+
+<div class="card"><div class="mode">Daytime Dining</div><div class="title">Easy Eats Groove</div><div class="desc">Casual daytime dining energy.</div>
+<div class="controls"><div class="play" onclick="toggle('a3',this)">▶</div><div class="progress-wrap"><div class="progress" id="p3"></div></div></div>
+<audio id="a3" src="/SoulfulLunch.mp3"></audio></div>
+
+<div class="card"><div class="mode">Core Brand Mode</div><div class="title">Heritage Rhythms</div><div class="desc">Local flavor and identity anchor.</div>
+<div class="controls"><div class="play" onclick="toggle('a4',this)">▶</div><div class="progress-wrap"><div class="progress" id="p4"></div></div></div>
+<audio id="a4" src="/HeritageRhythms.mp3"></audio></div>
+
+<div class="card"><div class="mode">Grill & Bar Mode</div><div class="title">Grill Gather</div><div class="desc">Energy lift, social bar vibes, grill aroma.</div>
+<div class="controls"><div class="play" onclick="toggle('a5',this)">▶</div><div class="progress-wrap"><div class="progress" id="p5"></div></div></div>
+<audio id="a5" src="/GrillGather.mp3"></audio></div>
+
+<div class="card"><div class="mode">Sunset Lounge</div><div class="title">Live Band Sunset</div><div class="desc">Ambient music for evening unwind.</div>
+<div class="controls"><div class="play" onclick="toggle('a6',this)">▶</div><div class="progress-wrap"><div class="progress" id="p6"></div></div></div>
+<audio id="a6" src="/LiveBandSunset.mp3"></audio></div>
+
+<div class="card"><div class="mode">Premium Lounge</div><div class="title">Jazz Garden Lounge</div><div class="desc">Relaxed conversations, cocktails, refinement.</div>
+<div class="controls"><div class="play" onclick="toggle('a7',this)">▶</div><div class="progress-wrap"><div class="progress" id="p7"></div></div></div>
+<audio id="a7" src="/JazzGardenLounge.mp3"></audio></div>
+
+<div class="card"><div class="mode">Soulful Mode</div><div class="title">Soul Session Mix</div><div class="desc">Energetic but classy, indoor/outdoor balance.</div>
+<div class="controls"><div class="play" onclick="toggle('a8',this)">▶</div><div class="progress-wrap"><div class="progress" id="p8"></div></div></div>
+<audio id="a8" src="/SoulSessionMix.mp3"></audio></div>
+
+<div class="card"><div class="mode">Cultural Mode</div><div class="title">Cultural Echo Beat</div><div class="desc">Highlighting local roots and community vibe.</div>
+<div class="controls"><div class="play" onclick="toggle('a9',this)">▶</div><div class="progress-wrap"><div class="progress" id="p9"></div></div></div>
+<audio id="a9" src="/CulturalEchoBeat.mp3"></audio></div>
+
+<div class="card"><div class="mode">Afternoon Energy</div><div class="title">Late Afternoon Pulse</div><div class="desc">Transition from day to evening energy.</div>
+<div class="controls"><div class="play" onclick="toggle('a10',this)">▶</div><div class="progress-wrap"><div class="progress" id="p10"></div></div></div>
+<audio id="a10" src="/LateAfternoonPulse.mp3"></audio></div>
+
+<div class="card"><div class="mode">Evening Social</div><div class="title">Evening Unite</div><div class="desc">Evening social vibe, cocktails and conversations.</div>
+<div class="controls"><div class="play" onclick="toggle('a11',this)">▶</div><div class="progress-wrap"><div class="progress" id="p11"></div></div></div>
+<audio id="a11" src="/EveningUnite.mp3"></audio></div>
+
+<div class="card"><div class="mode">Closure Mode</div><div class="title">Twilight Heritage</div><div class="desc">Wind-down finale, memory imprint, brand recall.</div>
+<div class="controls"><div class="play" onclick="toggle('a12',this)">▶</div><div class="progress-wrap"><div class="progress" id="p12"></div></div></div>
+<audio id="a12" src="/TwilightHeritage.mp3"></audio></div>
+
+</div>
+
+<!-- Persuasion / Business Sections -->
+<div class="container" style="grid-template-columns:1fr;">
+<div class="card"><div class="mode">Why This Matters</div><div class="title">Music Is Brand Infrastructure</div><div class="desc">
+Customers remember how a place makes them feel, not just what they eat. Branded playlists turn atmosphere into identity, identity into memory, and memory into loyalty.
+</div></div>
+
+<div class="card"><div class="mode">Business Impact</div><div class="title">What Branded Audio Does</div><div class="desc">
+• Increases average customer stay time<br>
+• Improves mood and energy consistency<br>
+• Creates emotional brand association<br>
+• Strengthens venue identity<br>
+• Builds customer loyalty<br>
+• Differentiates Three Monkeys from generic casual dining spaces
+</div></div>
+
+<div class="card"><div class="mode">Deployment Zones</div><div class="title">Where Playlist Works</div><div class="desc">
+• Entrance & arrival atmosphere<br>
+• Lunch service hours<br>
+• Bar seating<br>
+• Outdoor patio<br>
+• Weekend brunch<br>
+• Evening wind-down<br>
+• Special events<br>
+• Private parties
+</div></div>
+
+<div class="card"><div class="mode">Brand Strategy</div><div class="title">From Dining Space to Brand Experience</div><div class="desc">
+Playlist system transforms Three Monkeys from a venue into a memorable experience. Music is part of your brand identity — like interior design, service, and lighting.
+</div></div>
+
+<div class="card"><div class="mode">Commercial Model</div><div class="title">Service, Not Just Playlist</div><div class="desc">
+• Monthly curated sound service<br>
+• Seasonal updates<br>
+• Event-based sound design<br>
+• Branded audio identity ownership<br>
+• Exclusive venue audio branding
+</div></div>
+
+<div class="card"><div class="mode">Proposal</div><div class="title">Partnership Vision</div><div class="desc">
+This demo represents a long-term sound partnership. Three Monkeys becomes the first branded audio identity in casual dining Harare — not just a place to eat, but an experience brand.
+</div></div>
+</div>
+
+<!-- Premium WhatsApp Button -->
+<a id="ws-whatsapp-btn" href="https://wa.me/263779388560?text=Hello%20WarStreet%20Studios%2C%20I%20just%20visited%20your%20Three%20Monkeys%20playlist%20demo%20and%20I'm%20interested%20in%20your%20branded%20audio%20service." target="_blank">
+<img src="/ws-whatsapp-icon.png" alt="WhatsApp">
+</a>
+
+<div class="footer">
+© 2026 · Three Monkeys Branded Audio System · Demo Presentation · All Rights Reserved
+</div>
+
+<script>
+// Lock interactions
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.onkeydown = function(e){
+ if(e.keyCode==123) return false;
+ if(e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) return false;
+ if(e.ctrlKey && e.key.toLowerCase()=='u') return false;
+};
+document.body.onselectstart = () => false;
+document.body.ondragstart = () => false;
+
+const audios = ['a1','a2','a3','a4','a5','a6','a7','a8','a9','a10','a11','a12'];
+
+function toggle(id,btn){
+ audios.forEach(a=>{
+   if(a!==id){
+     const o=document.getElementById(a); o.pause(); o.currentTime=0;
+   }
+ });
+ const audio=document.getElementById(id);
+ if(audio.paused){audio.play();btn.innerHTML='⏸';} else{audio.pause();btn.innerHTML='▶';}
+}
+
+setInterval(()=>{
+ audios.forEach((id,i)=>{
+   const a=document.getElementById(id);
+   const p=document.getElementById('p'+(i+1));
+   if(a.duration){p.style.width=(a.currentTime/a.duration*100)+'%';}
+ });
+},200);
+</script>
+</body>
+</html>
