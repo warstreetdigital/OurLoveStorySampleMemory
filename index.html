@@ -3,24 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SHAMMAH | BIRTHDAY MEMORY</title>
+    <title>SHAMMAH & TRUTH | ARCHIVE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #0f0711;
-            --bg-mid: #24102d;
-            --accent-purple: #5e2b6d;
-            --accent-pink: #ffbfd8;
-            --accent-pink-light: #ffd9ea;
-            --ivory: #fff4fa;
-            --ivory-muted: rgba(255, 244, 250, 0.6);
+            --wine-deep: #1a0505;
+            --wine-mid: #2D0B0B;
+            --ivory: #FAF9F6;
+            --ivory-muted: rgba(250, 249, 246, 0.6);
+            --gold-soft: #C2A3A3;
             --f-serif: 'Cormorant Garamond', Georgia, serif;
             --f-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            --safe-padding: 30px;
-            --glow-pink: rgba(255, 191, 216, 0.2);
-            --glow-purple: rgba(94, 43, 109, 0.4);
+            --safe-padding: 24px;
         }
 
         * {
@@ -28,21 +24,14 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-deep);
+            background-color: var(--wine-deep);
             color: var(--ivory);
             font-family: var(--f-sans);
             overflow-x: hidden;
             line-height: 1.6;
-            height: 100vh;
-        }
-
-        body.is-unlocked {
-            height: auto;
-            overflow-y: auto;
         }
 
         #atmosphere {
@@ -51,61 +40,9 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 1;
+            z-index: 0;
             pointer-events: none;
-            background: linear-gradient(180deg, #0f0711 0%, #24102d 30%, #5e2b6d 65%, #ffbfd8 100%);
-            background-size: 100% 200%;
-            animation: bgBreath 25s infinite alternate ease-in-out;
-        }
-
-        @keyframes bgBreath {
-            0% { background-position: 50% 0%; }
-            100% { background-position: 50% 100%; }
-        }
-
-        /* Cinematic Overlays */
-        .vignette {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at center, transparent 20%, rgba(15, 7, 17, 0.8) 120%);
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        .grain {
-            position: fixed;
-            inset: -50%;
-            width: 200%;
-            height: 200%;
-            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-            opacity: 0.15;
-            z-index: 6;
-            pointer-events: none;
-            animation: grainShift 8s steps(10) infinite;
-        }
-
-        @keyframes grainShift {
-            0%, 100% { transform: translate(0, 0); }
-            10% { transform: translate(-5%, -10%); }
-            30% { transform: translate(-15%, 5%); }
-            50% { transform: translate(7%, 9%); }
-            70% { transform: translate(-3%, 12%); }
-            90% { transform: translate(12%, -5%); }
-        }
-
-        .glow-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: 2;
-            pointer-events: none;
-            opacity: 0.15;
-            animation: orbDrift 20s infinite alternate ease-in-out;
-        }
-
-        @keyframes orbDrift {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(100px, 100px) scale(1.5); }
+            background: radial-gradient(circle at 50% 50%, var(--wine-mid) 0%, var(--wine-deep) 100%);
         }
 
         #app {
@@ -117,1172 +54,798 @@
         .meta-label {
             font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.35em;
+            letter-spacing: 0.25em;
             font-weight: 500;
             color: var(--ivory-muted);
-            margin-bottom: 20px;
-            display: block;
         }
 
-        /* Section 01: Hero Entrance */
-        .entrance-screen {
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            padding: var(--safe-padding);
-            transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 2s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 2s ease;
-            background: radial-gradient(circle at center, transparent 0%, var(--bg-deep) 100%);
-            overflow: hidden;
-        }
-
-        .entrance-screen::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150vw;
-            height: 150vh;
-            background: radial-gradient(circle, var(--accent-purple) 0%, transparent 60%);
-            filter: blur(120px);
-            opacity: 0.25;
-            z-index: -1;
-            animation: atmosphericDrift 20s infinite alternate ease-in-out;
-            pointer-events: none;
-        }
-
-        @keyframes atmosphericDrift {
-            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            50% { transform: translate(-45%, -55%) rotate(5deg) scale(1.1); }
-            100% { transform: translate(-55%, -45%) rotate(-5deg) scale(0.9); }
-        }
-
-        .entrance-screen.is-hidden {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-5vh);
-            filter: blur(20px);
-        }
-
-        .archive-tag {
-            font-size: 9px;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
-            font-weight: 500;
-            color: var(--accent-pink);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: revealUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px var(--glow-pink);
-        }
-
-        .hero-title {
+        .main-title {
             font-family: var(--f-serif);
-            font-size: clamp(2.2rem, 10vw, 5rem);
+            font-size: clamp(1.8rem, 8vw, 3.2rem);
             font-weight: 300;
-            line-height: 1.1;
-            margin: 0 0 10px;
+            line-height: 1.05;
+            margin: 20px 0;
             letter-spacing: -0.01em;
             color: var(--ivory);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: revealUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
-            max-width: 90vw;
-            text-shadow: 0 0 30px rgba(255, 191, 216, 0.15);
+            max-width: 480px;
         }
 
-        .hero-subtext {
-            font-size: 11px;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--accent-pink);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: revealUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-
-        .emotional-line {
-            font-family: var(--f-serif);
-            font-size: clamp(1rem, 3vw, 1.4rem);
+        .main-title .amp {
+            font-size: 0.6em;
+            opacity: 0.5;
+            margin: 0 10px;
             font-style: italic;
-            color: var(--ivory-muted);
-            opacity: 0;
-            transform: translateY(15px);
-            animation: revealUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.2s;
-            margin-bottom: 50px;
-        }
-
-        .hero-card {
-            width: 180px;
-            aspect-ratio: 4/5;
-            margin-bottom: 50px;
-            position: relative;
-            z-index: 10;
-            opacity: 0;
-            transform: translateY(40px) rotate(-2deg);
-            animation: revealUpCard 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s, floatCard 6s infinite ease-in-out 3s;
-        }
-
-        .hero-card-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), 0 0 40px var(--glow-purple);
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-        }
-
-        .hero-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(1.05);
-        }
-
-        @keyframes revealUpCard {
-            to { opacity: 1; transform: translateY(0) rotate(-2deg); }
-        }
-
-        @keyframes floatCard {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
-            50% { transform: translateY(-15px) rotate(1deg); }
-        }
-
-        .enter-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 18px 45px;
-            font-family: var(--f-sans);
-            font-size: 11px;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--ivory);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0;
-            transform: translateY(15px);
-            animation: revealUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.2s;
-            border-radius: 40px;
-            backdrop-filter: blur(10px);
-        }
-
-        .enter-btn:hover {
-            border-color: var(--accent-pink);
-            background: rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            vertical-align: middle;
             transform: translateY(-2px);
-            letter-spacing: 0.45em;
-            box-shadow: 0 10px 40px var(--glow-pink);
         }
 
-        @keyframes revealUp {
+        /* Hero */
+        .hero {
+            height: 65vh;
+            display: flex;
+            align-items: center;
+            padding: 0 var(--safe-padding);
+            position: relative;
+            z-index: 20;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vw;
+            height: 60vh;
+            background: radial-gradient(circle, rgba(194, 163, 163, 0.05) 0%, transparent 70%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 100%;
+        }
+
+        .hero-content > * {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: cinematicReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-content .meta-label { animation-delay: 0.3s; }
+        .hero-content .main-title { animation-delay: 0.6s; }
+        .hero-content .status-bar { animation-delay: 1s; }
+
+        @keyframes cinematicReveal {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes revealUpSoft {
-            0% { opacity: 0; transform: translateY(15px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Main Content Container */
-        .archive-content {
-            opacity: 0;
-            transition: opacity 2s ease 0.5s;
-            padding-top: 50vh;
-            padding-bottom: 100px;
-        }
-
-        .archive-content.is-ready {
-            opacity: 1;
-        }
-
-        /* Section 02: Internal Hero */
-        .internal-hero {
-            height: 100vh;
+        .status-bar {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: var(--safe-padding);
-            position: relative;
-            margin-bottom: 5vh;
+            gap: 12px;
+            margin-top: 48px;
         }
 
-        .internal-hero-tag {
-            font-size: 9px;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
-            font-weight: 500;
-            color: var(--accent-pink);
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: revealUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
-            text-shadow: 0 0 10px var(--glow-pink);
+        .status-dot {
+            width: 5px;
+            height: 5px;
+            background: #cc0000;
+            border-radius: 50%;
+            animation: pulse 3s infinite;
         }
 
-        .internal-hero-title {
-            font-family: var(--f-serif);
-            font-size: clamp(2.2rem, 10vw, 5.5rem);
-            font-weight: 300;
-            line-height: 1;
-            margin-bottom: 20px;
-            color: var(--ivory);
-            letter-spacing: -0.02em;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: revealUp 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
-            max-width: 90vw;
-            text-shadow: 0 0 30px rgba(255, 191, 216, 0.2);
-        }
-
-        .internal-hero-sub {
-            font-size: 11px;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--accent-pink-light);
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: revealUp 2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
-            opacity: 0.7;
-        }
-
-        .internal-hero-emotional {
-            font-family: var(--f-serif);
-            font-size: clamp(1.1rem, 3.5vw, 1.6rem);
-            font-style: italic;
+        .status-text {
+            font-size: 10px;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
             color: var(--ivory-muted);
-            max-width: 500px;
-            line-height: 1.4;
-            margin-bottom: 60px;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: revealUp 2s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s;
+            font-style: italic;
+            transition: opacity 0.8s ease;
         }
 
-        .scroll-cue {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
+        /* Grid */
+        .memory-grid {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 15px;
+            gap: 160px;
+            padding: 0 var(--safe-padding) 160px var(--safe-padding);
+            max-width: 1000px;
+            margin: -5vh auto 0; /* Reduced overlap */
+            position: relative;
+            z-index: 25;
+        }
+
+        /* Card */
+        .memory-card {
+            position: relative;
+            will-change: transform, opacity;
             opacity: 0;
-            animation: fadeIn 2s forwards 2s, scrollPulse 3s infinite ease-in-out;
+            transform: translateY(60px);
+            transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 2s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 1.5s ease;
+            filter: blur(10px) brightness(0.8);
         }
 
-        @keyframes fadeIn {
-            to { opacity: 0.5; }
+        .memory-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0px) brightness(1);
         }
 
-        @keyframes scrollPulse {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(10px); }
+        .memory-card.is-focused {
+            z-index: 50;
         }
 
-        .scroll-cue span {
-            font-size: 8px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-        }
-
-        .cue-line {
-            width: 1px;
-            height: 50px;
-            background: linear-gradient(to bottom, var(--accent-pink), transparent);
-            animation: cueAnim 2.5s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
-
-        @keyframes cueAnim {
-            0% { transform: scaleY(0); transform-origin: top; opacity: 0; }
-            40% { transform: scaleY(1); transform-origin: top; opacity: 1; }
-            60% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
-            100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
-        }
-
-        /* Section 02: Hero Memory Player */
-        .memory-player-section {
-            min-height: 100vh;
+        /* Paired Layouts */
+        .memory-pair {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 var(--safe-padding);
-            margin-bottom: 15vh;
-        }
-
-        .player-card {
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
             width: 100%;
-            max-width: 500px;
-            position: relative;
-            z-index: 10;
         }
 
-        .player-card-inner {
-            position: relative;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(30px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 60px 120px rgba(0, 0, 0, 0.4), 0 0 60px var(--glow-purple);
-            overflow: hidden;
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        .memory-pair > .memory-card {
+            width: calc(50% - 10px);
+            margin-top: 0 !important;
         }
 
-        .player-image-wrap {
-            width: 100%;
-            aspect-ratio: 4/5;
+        .memory-pair > .memory-card:nth-child(2) {
+            margin-top: 60px !important;
+        }
+
+        .card-inner {
             position: relative;
             overflow: hidden;
+            background: rgba(45, 11, 11, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(250, 249, 246, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(194, 163, 163, 0.02);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .player-image-wrap img {
+        .memory-card img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+            height: auto;
+            display: block;
+            mix-blend-mode: saturation;
+            filter: brightness(0.85) contrast(1.1);
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .play-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(74, 45, 52, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background 0.6s ease;
+        .memory-card.is-focused .card-inner {
+            border-color: rgba(250, 249, 246, 0.15);
+            box-shadow: 0 45px 90px rgba(0,0,0,0.6), 0 0 60px rgba(194, 163, 163, 0.05);
         }
 
-        .play-btn {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            color: var(--ivory);
-            z-index: 20;
-            box-shadow: 0 0 30px var(--glow-pink);
+        .memory-card.is-focused img {
+            mix-blend-mode: normal;
+            filter: brightness(1) contrast(1);
+            transform: scale(1.04);
         }
 
-        .play-btn:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 50px var(--accent-pink);
+        .memory-card:hover .card-inner {
+            transform: translateY(-12px);
+            border-color: rgba(250, 249, 246, 0.25);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.7), 0 0 70px rgba(194, 163, 163, 0.08);
         }
 
-        .play-btn:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.5);
+        .memory-card:hover img {
+            mix-blend-mode: normal;
+            filter: brightness(1) contrast(1);
+            transform: scale(1.08);
         }
 
-        .play-btn.is-faded {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(0.8);
-        }
-
-        .play-overlay::after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 1px solid var(--accent-pink);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 1s ease;
-        }
-
-        .play-overlay.is-active::after {
-            animation: audioPulse 2s infinite;
-        }
-
-        @keyframes audioPulse {
-            0% { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(1.8); opacity: 0; }
-        }
-
-        .play-btn svg {
-            width: 30px;
-            height: 30px;
-            fill: currentColor;
-            margin-left: 4px;
-        }
-
-        .play-btn.is-playing svg {
-            margin-left: 0;
-        }
-
-        .audio-ui {
-            padding: 30px;
-            text-align: center;
-        }
-
-        .waveform-container {
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 3px;
-            margin-bottom: 20px;
-        }
-
-        .wave-bar {
-            width: 3px;
-            height: 4px;
-            background: var(--ivory);
-            opacity: 0.2;
-            transition: height 0.3s ease, opacity 0.3s ease;
-        }
-
-        .is-playing .wave-bar {
-            opacity: 0.6;
-            animation: waveform 1s infinite ease-in-out;
-        }
-
-        @keyframes waveform {
-            0%, 100% { height: 4px; }
-            50% { height: 25px; }
-        }
-
-        .progress-container {
-            width: 100%;
-            height: 2px;
-            background: rgba(74, 45, 52, 0.05);
-            position: relative;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .progress-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: var(--accent-pink);
-            width: 0%;
-            transition: width 0.1s linear;
-            box-shadow: 0 0 15px var(--accent-pink);
-        }
-
-        /* Section 03: Slideshow Horizontal Rail */
-        .slideshow-section {
-            padding: 120px 0;
+        /* Memory Rails */
+        .rail-section {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            padding: 40px 0;
             overflow: hidden;
             position: relative;
         }
 
-        .slideshow-title {
-            padding: 0 var(--safe-padding) 60px;
+        .rail-header {
+            padding: 0 var(--safe-padding) 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .rail-title {
             font-family: var(--f-serif);
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-            font-weight: 300;
+            font-size: 1.8rem;
             font-style: italic;
             opacity: 0.9;
-            text-align: center;
-            letter-spacing: -0.01em;
+        }
+
+        .rail-wrapper {
+            position: relative;
+            width: 100%;
         }
 
         .memory-rail {
             display: flex;
-            gap: 40px;
+            gap: 30px;
             overflow-x: auto;
-            padding: 40px var(--safe-padding) 80px;
+            padding: 0 var(--safe-padding) 60px;
             scrollbar-width: none;
-            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;
             cursor: grab;
-            align-items: center;
+            scroll-behavior: smooth;
         }
 
         .memory-rail::-webkit-scrollbar {
             display: none;
         }
 
-        .rail-item {
-            flex: 0 0 75vw;
-            max-width: 420px;
-            scroll-snap-align: center;
+        .memory-rail:active {
+            cursor: grabbing;
+        }
+
+        .rail-nav-hint {
+            position: absolute;
+            right: var(--safe-padding);
+            bottom: 40px;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            opacity: 0.6;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 30;
+        }
+
+        .rail-arrow {
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--ivory));
             position: relative;
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                        opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            filter: blur(4px) brightness(0.8);
-            opacity: 0.5;
-            transform: scale(0.9);
+            animation: arrowDrift 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .rail-item.is-active {
-            filter: blur(0) brightness(1.05);
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        .rail-image-card {
-            width: 100%;
-            aspect-ratio: 4/5;
-            border-radius: 24px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Card Bloom */
-        .rail-item::before {
+        .rail-arrow::after {
             content: '';
             position: absolute;
+            right: 0;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
-            filter: blur(60px);
-            opacity: 0;
-            z-index: 1;
-            transition: opacity 1.5s ease;
-            pointer-events: none;
+            width: 6px;
+            height: 6px;
+            border-top: 1px solid var(--ivory);
+            border-right: 1px solid var(--ivory);
+            transform: translateY(-50%) rotate(45deg);
         }
 
-        .rail-item.is-active::before {
-            opacity: 0.5;
+        @keyframes arrowDrift {
+            0%, 100% { transform: translateX(0); opacity: 0.3; }
+            50% { transform: translateX(12px); opacity: 0.7; }
         }
 
-        .rail-image-card img {
-            width: 100%;
+        .rail-item {
+            flex: 0 0 75vw; /* Slightly smaller to ensure next item is visible (peek) */
+            max-width: 420px;
+        }
+
+        .rail-item .card-inner {
+            aspect-ratio: 4/5;
+        }
+
+        .rail-item img {
             height: 100%;
             object-fit: cover;
-            transition: transform 3s ease;
-            filter: brightness(0.9) contrast(1.1);
         }
 
-        .rail-item.is-active .rail-image-card img {
-            filter: brightness(1.1) contrast(1);
-        }
-
-        /* Text Slides */
-        .text-slide-content {
-            width: 100%;
-            aspect-ratio: 4/5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(40px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
-        }
-
-        .text-slide-content p {
-            font-family: var(--f-serif);
-            font-size: clamp(1.4rem, 4vw, 2rem);
-            font-style: italic;
-            line-height: 1.4;
-            color: var(--accent-pink-light);
-            text-shadow: 0 0 20px var(--glow-pink);
-            opacity: 0.8;
-        }
-
-        /* Luxury Markers */
-        .slideshow-nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
+        .card-meta {
             margin-top: 20px;
+            padding: 0 8px;
         }
 
-        .marker-track {
-            height: 2px;
-            width: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.6s ease;
-        }
-
-        .marker-fill {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0%;
-            background: var(--accent-pink);
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px var(--accent-pink);
-        }
-
-        .marker-track.is-active {
-            width: 80px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .marker-track.is-active .marker-fill {
-            width: 100%;
-            transition: width 1s linear;
-        }
-
-        /* Section 04: Final Birthday Memory */
-        .closing-section {
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: var(--safe-padding);
-            position: relative;
-        }
-
-        .closing-quote {
+        .card-title {
             font-family: var(--f-serif);
-            font-size: clamp(1.4rem, 5vw, 2.4rem);
+            font-size: 1.25rem;
             font-style: italic;
-            color: var(--accent-pink);
+            color: var(--gold-soft);
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
+        }
+
+        .card-location {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--ivory-muted);
+            font-weight: 500;
+        }
+
+        /* Staggered Rhythm Variations */
+        .card-portrait { width: 70%; }
+        .card-wide { width: 100%; }
+        .card-small { width: 50%; }
+
+        .align-right { align-self: flex-end; margin-right: 5%; }
+        .align-center { align-self: center; }
+        .align-left { align-self: flex-start; margin-left: 5%; }
+
+        /* Vertical Offsets */
+        .offset-v-sm { margin-top: -40px; }
+        .offset-v-md { margin-top: -80px; }
+        .offset-v-lg { margin-top: -120px; }
+
+        /* Footer */
+        .archive-footer {
+            padding: 120px var(--safe-padding) 80px;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+            overflow: hidden;
+        }
+
+        .footer-glow {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 300px;
+            background: radial-gradient(circle at center 100%, rgba(45, 11, 11, 0.6) 0%, transparent 80%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .footer-content {
             max-width: 600px;
-            line-height: 1.4;
-            margin-bottom: 80px;
-            transition: opacity 2s ease, transform 2s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            text-shadow: 0 0 20px var(--glow-pink);
+            margin: 0 auto;
         }
 
-        .closing-quote.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+        .footer-line {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--ivory), transparent);
+            opacity: 0.15;
+            margin-bottom: 40px;
         }
 
-        .branding-wrap {
-            margin-top: 100px;
-            opacity: 0.6;
-            transition: opacity 2s ease 0.5s;
-        }
-
-        .branding-title {
-            font-size: 11px;
-            letter-spacing: 0.5em;
+        .footer-meta {
+            font-size: 10px;
+            letter-spacing: 0.35em;
+            color: var(--ivory-muted);
+            margin-bottom: 24px;
             text-transform: uppercase;
             font-weight: 500;
-            margin-bottom: 10px;
-            color: var(--accent-pink);
         }
 
-        .branding-sub {
+        .footer-quote {
+            font-family: var(--f-serif);
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-style: italic;
+            color: var(--gold-soft);
+            opacity: 0.8;
+            line-height: 1.4;
+            margin-bottom: 60px;
+        }
+
+        .footer-signature {
+            border-top: 1px solid rgba(250, 249, 246, 0.05);
+            padding-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sig-line {
             font-size: 9px;
-            letter-spacing: 0.2em;
-            opacity: 0.7;
-            color: var(--ivory);
+            letter-spacing: 0.15em;
+            color: var(--ivory-muted);
+            text-transform: uppercase;
+            opacity: 0.4;
+            font-weight: 400;
         }
 
-        /* Decorative Particles for cards */
-        .bloom-shadow {
-            position: absolute;
+        /* Ambient Layer */
+        .ambient-text {
+            position: fixed; /* Fixed so it stays in background */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
-            filter: blur(50px);
-            opacity: 0.2;
-            z-index: -1;
+            font-family: var(--f-serif);
+            font-size: 25vw;
+            color: var(--ivory);
+            opacity: 0.02;
             pointer-events: none;
+            white-space: nowrap;
+            z-index: -1;
         }
 
-        /* Mobile Adjustments */
+        /* Animations */
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.3); background: #cc0000; }
+        }
+
+        /* Mobile Optimizations */
         @media (max-width: 600px) {
-            .rail-item { flex: 0 0 85vw; }
-            .memory-player-section { padding-top: 10vh; }
+            .hero { 
+                height: 55vh; 
+                padding: 0 20px; 
+            }
+            .main-title { 
+                font-size: clamp(1.8rem, 9.5vw, 2.4rem); 
+                line-height: 1.25;
+                max-width: 280px; /* Force balanced wrap */
+            }
+            .memory-grid { 
+                gap: 120px; 
+                padding-bottom: 120px; 
+                margin-top: -3vh; /* Minimal overlap on mobile */
+            }
+            .card-portrait { width: 85%; }
+            .card-small { width: 75%; }
+            .memory-pair { flex-direction: column; gap: 80px; }
+            .memory-pair > .memory-card { width: 100%; }
+            .memory-pair > .memory-card:nth-child(2) { margin-top: 0 !important; }
+            .align-right { margin-right: 0; }
+            .align-left { margin-left: 0; }
         }
     </style>
 </head>
-<body>
+<body class="archive-theme">
     <canvas id="atmosphere"></canvas>
-    <div class="vignette"></div>
-    <div class="grain"></div>
     
     <div id="app">
-        <!-- Section 01: Hero Entrance -->
-        <div id="entrance" class="entrance-screen">
-            <div class="glow-orb" style="width: 400px; height: 400px; background: var(--accent-purple); top: 10%; left: 10%; animation-duration: 30s;"></div>
-            <div class="glow-orb" style="width: 500px; height: 500px; background: var(--accent-pink); bottom: 10%; right: 10%; animation-duration: 25s; animation-direction: reverse;"></div>
-            
-            <span class="archive-tag">WARSTREET BIRTHDAY ARCHIVE™</span>
-            
-            <div class="hero-card">
-                <div class="hero-card-inner">
-                    <img src="https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammahBirthday/after-hero-image.jpg" alt="Featured Memory">
+        <div class="ambient-text">ENDLESSLY</div>
+        <header class="hero">
+            <div class="hero-glow"></div>
+            <div class="hero-content">
+                <p class="meta-label">A QUIET COLLECTION OF US</p>
+                <h1 class="main-title">SHAMMAH NYASHADZASHE <span class="amp">&</span> TRUTH JOHNSON</h1>
+                <div class="status-bar">
+                    <span class="status-dot"></span>
+                    <span class="status-text">some memories never leave</span>
                 </div>
             </div>
+        </header>
 
-            <h1 class="hero-title">SHAMMAH<br>NYASHADZASHE</h1>
-            <p class="hero-subtext">Twenty Beautiful Years</p>
-            <p class="emotional-line">“Some memories deserve more than a photograph.”</p>
-            
-            <button id="enterMemory" class="enter-btn">Enter Memory</button>
-        </div>
-
-        <!-- Scrollable Content -->
-        <main id="mainContent" class="archive-content">
-            
-            <!-- Section 01.5: Internal Hero -->
-            <section class="internal-hero">
-                <div class="glow-orb" style="width: 600px; height: 600px; background: var(--glow-purple); top: 20%; left: 20%; opacity: 0.1;"></div>
-                <div class="glow-orb" style="width: 400px; height: 400px; background: var(--glow-pink); bottom: 20%; right: 20%; opacity: 0.1;"></div>
-
-                <div class="bloom-shadow" style="width: 150%; height: 150%; opacity: 0.25; animation: atmosphericDrift 25s infinite alternate ease-in-out;"></div>
-                
-                <div class="hero-decorative-blooms">
-                    <div class="bloom-shadow" style="width: 300px; height: 300px; top: 20%; left: 10%; opacity: 0.15; filter: blur(60px); animation: floatCard 8s infinite ease-in-out;"></div>
-                    <div class="bloom-shadow" style="width: 400px; height: 400px; top: 70%; left: 80%; opacity: 0.1; filter: blur(80px); animation: floatCard 12s infinite ease-in-out reverse;"></div>
-                </div>
-
-                <span class="internal-hero-tag" style="opacity: 0.8;">WARSTREET BIRTHDAY MEMORY™</span>
-                <h1 class="internal-hero-title">SHAMMAH<br>NYASHADZASHE</h1>
-                <p class="internal-hero-sub">TWENTY BEAUTIFUL YEARS</p>
-                <p class="internal-hero-emotional">“A life beautifully remembered in motion.”</p>
-                
-                <div style="width: 1px; height: 120px; background: linear-gradient(to bottom, var(--accent-pink), transparent); margin-bottom: 40px; opacity: 0.4;"></div>
-
-                <div class="scroll-cue">
-                    <span>Scroll to explore</span>
-                    <div class="cue-line"></div>
-                </div>
-            </section>
-
-            <!-- Section 02: Hero Memory Player -->
-            <section class="memory-player-section">
-                <div class="player-card">
-                    <div class="bloom-shadow"></div>
-                    <div class="player-card-inner">
-                        <div class="player-image-wrap">
-                            <img src="https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammahBirthday/after-hero-image.jpg" alt="Shammah Birthday">
-                            <div class="play-overlay">
-                                <button id="playAudio" class="play-btn">
-                                    <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                    <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="audio-ui">
-                            <div class="waveform-container" id="waveform">
-                                <!-- Generated by JS -->
-                            </div>
-                            <span class="meta-label" style="font-size: 8px; margin-bottom: 0;">Preserved Birthday Message</span>
-                            <div class="progress-container" id="progressWrap">
-                                <div id="progressBar" class="progress-bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <audio id="birthdayAudio" src="https://pub-e81a254724df4bfaa01f780b72af68c4.r2.dev/warstreetmemories/BirthdayShammaSong/ShammaBirthdayMemo.mp3"></audio>
-            </section>
-
-            <!-- Section 03: Birthday Slideshow -->
-            <section class="slideshow-section">
-                <h2 class="slideshow-title">Fragments of Twenty</h2>
-                <div id="rail" class="memory-rail">
-                    <!-- Slideshow items -->
-                    <div class="rail-item">
-                        <div class="rail-image-card">
-                            <img src="https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammahBirthday/IMG-20260513-WA0063.jpg" alt="">
-                        </div>
-                    </div>
-                    
-                    <div class="rail-item text-slide">
-                        <div class="text-slide-content">
-                            <p>“Twenty years of becoming.”</p>
-                        </div>
-                    </div>
-
-                    <div class="rail-item">
-                        <div class="rail-image-card">
-                            <img src="https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammahBirthday/IMG-20260513-WA0066.jpg" alt="">
-                        </div>
-                    </div>
-                    
-                    <div class="rail-item">
-                        <div class="rail-image-card">
-                            <img src="https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammahBirthday/IMG-20260513-WA0079.jpg" alt="">
-                        </div>
-                    </div>
-
-                    <div class="rail-item text-slide">
-                        <div class="text-slide-content">
-                            <p>“Some moments quietly shape us forever.”</p>
-                        </div>
-                    </div>
-
-                    <div class="rail-item">
-                        <div class="rail-image-card">
-                            <img src="https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammahBirthday/IMG-20260513-WA0082(1).jpg" alt="">
-                        </div>
-                    </div>
-                    
-                    <div class="rail-item">
-                        <div class="rail-image-card">
-                            <img src="https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammahBirthday/IMG-20260513-WA0083.jpg" alt="">
-                        </div>
-                    </div>
-
-                    <div class="rail-item text-slide">
-                        <div class="text-slide-content">
-                            <p>“Beauty lives in memory.”</p>
-                        </div>
-                    </div>
-
-                    <div class="rail-item">
-                        <div class="rail-image-card">
-                            <img src="https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammahBirthday/IMG-20260513-WA0084.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="slideshow-nav" id="railNav">
-                    <!-- Nav markers generated by JS -->
-                </div>
-            </section>
-
-            <!-- Section 04: Final Closing -->
-            <section class="closing-section">
-                <p id="closingQuote" class="closing-quote">
-                    “Some birthdays become memories.<br>Some memories become forever.”
-                </p>
-                <div class="branding-wrap">
-                    <h3 class="branding-title">WARSTREET EXPERIENCE MODEL™</h3>
-                    <p class="branding-sub">Preserved through memory, sound, and emotion.</p>
-                </div>
-            </section>
-
+        <main id="memory-grid" class="memory-grid">
+            <!-- Cards injected by JS -->
         </main>
+
+        <footer class="archive-footer">
+            <div class="footer-glow"></div>
+            <div class="footer-content">
+                <div class="footer-line"></div>
+                <p class="footer-meta">ARCHIVE // HARARE • 2026</p>
+                <p class="footer-quote">“Everything we were, is everything we are.”</p>
+                <div class="footer-signature">
+                    <p class="sig-line">Powered by WarStreet Experience Model</p>
+                    <p class="sig-line">Digital Memory Artifact Series</p>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <script>
-        // Particle Atmosphere (Reused & Refined)
+        const SECTIONS = [
+            {
+                type: 'hero-anchor',
+                item: { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/the-day-you-made-us-proud.jpg', title: 'The Day You Made Us Proud', meta: 'Milestone • 2026', cardType: 'wide', align: 'center', offset: '' }
+            },
+            {
+                type: 'rail',
+                title: 'Mirror Reflections',
+                items: [
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/mirror-memory-1.jpg', title: 'Glance I', meta: 'Studio Reflection' },
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/mirror-memory-2.jpg', title: 'Glance II', meta: 'Studio Reflection' },
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/mirror-memory-3.jpg', title: 'Glance III', meta: 'Studio Reflection' },
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/us-in-the-mirror.jpg', title: 'Between Reflections', meta: 'Harare' }
+                ]
+            },
+            {
+                type: 'composition',
+                items: [
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/holding-on-softly.jpg', title: 'Holding On', meta: 'Sanctuary', cardType: 'portrait', align: 'left', offset: '' },
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/fingers-laced-forever.jpg', title: 'Laced Forever', meta: 'Endless', cardType: 'small', align: 'right', offset: 'v-md' },
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/quiet-touch.jpg', title: 'Held Softly', meta: 'Intimate Archive', cardType: 'portrait', align: 'right', offset: '' },
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/promise-in-her-hands.jpg', title: 'Our Tomorrow', meta: 'The Vow', cardType: 'small', align: 'left', offset: 'v-sm' }
+                ]
+            },
+            {
+                type: 'portrait-break',
+                item: { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/her-soft-smile.jpg', title: 'Luminescence', meta: 'The Garden', cardType: 'portrait', align: 'center', offset: '' }
+            },
+            {
+                type: 'rail',
+                title: 'Relationship Motion',
+                items: [
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/leaning-into-love.jpg', title: 'Gravity', meta: 'Harare' },
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/stolen-memory.jpg', title: 'Living Energy', meta: 'Private Space' },
+                    { url: 'https://pub-e10a28ca38cf452da437555e0f90e288.r2.dev/warstreetmemories/shammah-mug-archive/IMG-20260513-WA0068.jpg', title: 'Lasting Impression', meta: 'Closing Cycle' }
+                ]
+            }
+        ];
+
         class Atmosphere {
             constructor() {
                 this.canvas = document.getElementById('atmosphere');
                 this.ctx = this.canvas.getContext('2d');
                 this.particles = [];
-                this.particleCount = 35;
+                this.particleCount = 25;
+                this.scrollY = 0;
                 this.resize();
                 this.createParticles();
                 this.animate();
                 window.addEventListener('resize', () => this.resize());
+                window.addEventListener('scroll', () => {
+                    this.scrollY = window.pageYOffset;
+                }, { passive: true });
             }
+
             resize() {
                 this.canvas.width = window.innerWidth;
                 this.canvas.height = window.innerHeight;
             }
+
             createParticles() {
                 for (let i = 0; i < this.particleCount; i++) {
                     this.particles.push({
                         x: Math.random() * this.canvas.width,
                         y: Math.random() * this.canvas.height,
-                        size: Math.random() * 2 + 0.2,
+                        size: Math.random() * 4 + 1,
                         speedX: (Math.random() - 0.5) * 0.08,
                         speedY: (Math.random() - 0.5) * 0.08,
-                        opacity: Math.random() * 0.2,
-                        drift: Math.random() * 0.02,
-                        blur: Math.random() * 2,
-                        z: Math.random() * 1.5 // depth factor
+                        opacity: Math.random() * 0.25,
+                        parallaxFactor: 0.02 + Math.random() * 0.05
                     });
                 }
             }
+
             animate() {
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
                 this.particles.forEach(p => {
-                    const scrollOffset = window.scrollY * 0.05 * p.z;
-                    
-                    p.x += p.speedX + Math.sin(Date.now() * 0.001 * p.drift) * 0.2;
-                    p.y += p.speedY + Math.cos(Date.now() * 0.001 * p.drift) * 0.2;
-                    
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+
                     if (p.x < 0) p.x = this.canvas.width;
                     if (p.x > this.canvas.width) p.x = 0;
                     if (p.y < 0) p.y = this.canvas.height;
                     if (p.y > this.canvas.height) p.y = 0;
-                    
+
+                    // Apply parallax to Y position
+                    let drawY = (p.y - (this.scrollY * p.parallaxFactor)) % this.canvas.height;
+                    if (drawY < 0) drawY += this.canvas.height;
+
                     this.ctx.beginPath();
-                    this.ctx.arc(p.x, p.y - scrollOffset, p.size, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `rgba(255, 191, 216, ${p.opacity})`;
-                    if (p.blur > 1) {
-                        this.ctx.shadowBlur = p.blur;
-                        this.ctx.shadowColor = `rgba(255, 191, 216, ${p.opacity})`;
-                    }
+                    this.ctx.arc(p.x, drawY, p.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `rgba(250, 249, 246, ${p.opacity})`;
                     this.ctx.fill();
-                    this.ctx.shadowBlur = 0;
                 });
                 requestAnimationFrame(() => this.animate());
             }
         }
 
-        // Memory App Controller
-        class BirthdayMemory {
+        class MemoryArchive {
             constructor() {
-                this.atmosphere = new Atmosphere();
-                this.entrance = document.getElementById('entrance');
-                this.mainContent = document.getElementById('mainContent');
-                this.enterBtn = document.getElementById('enterMemory');
-                this.audio = document.getElementById('birthdayAudio');
-                this.playBtn = document.getElementById('playAudio');
-                this.progressBar = document.getElementById('progressBar');
-                this.progressWrap = document.getElementById('progressWrap');
-                this.waveform = document.getElementById('waveform');
-                this.rail = document.getElementById('rail');
-                this.dotsContainer = document.getElementById('dots');
-                this.closingQuote = document.getElementById('closingQuote');
+                this.grid = document.getElementById('memory-grid');
+                this.cards = [];
+                this.init();
+                new Atmosphere();
+                this.animate();
+            }
 
-                this.initEntrance();
-                this.initAudio();
-                this.initSlideshow();
-                this.initRevealObserver();
-                this.initAutoSlide();
+            createCardElement(img, isRail = false) {
+                const card = document.createElement('div');
+                card.className = isRail ? 'rail-item memory-card' : `memory-card card-${img.cardType} align-${img.align} ${img.offset}`;
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <img src="${img.url}" alt="${img.title}" loading="lazy">
+                    </div>
+                    <div class="card-meta">
+                        <h2 class="card-title">${img.title}</h2>
+                        <p class="card-location">${img.meta}</p>
+                    </div>
+                `;
+                return card;
+            }
+
+            init() {
+                SECTIONS.forEach((section) => {
+                    if (section.type === 'rail') {
+                        const railSect = document.createElement('section');
+                        railSect.className = 'rail-section';
+                        railSect.innerHTML = `
+                            <div class="rail-header">
+                                <h2 class="rail-title">${section.title}</h2>
+                                <p class="meta-label">view sequence</p>
+                            </div>
+                            <div class="rail-wrapper">
+                                <div class="memory-rail"></div>
+                                <div class="rail-nav-hint">
+                                    <div class="rail-arrow"></div>
+                                </div>
+                            </div>
+                        `;
+                        const rail = railSect.querySelector('.memory-rail');
+                        const hint = railSect.querySelector('.rail-nav-hint');
+                        
+                        section.items.forEach(img => {
+                            const card = this.createCardElement(img, true);
+                            rail.appendChild(card);
+                            this.cards.push(card);
+                            this.observeReveal(card);
+                        });
+                        this.grid.appendChild(railSect);
+                        this.initRailDrag(rail, hint);
+                    } else if (section.type === 'composition') {
+                        section.items.forEach(img => {
+                            const card = this.createCardElement(img);
+                            this.grid.appendChild(card);
+                            this.cards.push(card);
+                            this.observeReveal(card);
+                        });
+                    } else {
+                        const card = this.createCardElement(section.item);
+                        this.grid.appendChild(card);
+                        this.cards.push(card);
+                        this.observeReveal(card);
+                    }
+                });
                 this.initParallax();
             }
 
-            initParallax() {
-                const internalHero = document.querySelector('.internal-hero');
-                const title = internalHero.querySelector('.internal-hero-title');
-                const tag = internalHero.querySelector('.internal-hero-tag');
-                const sub = internalHero.querySelector('.internal-hero-sub');
-                const emotional = internalHero.querySelector('.internal-hero-emotional');
+            initRailDrag(rail, hint) {
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+                let velocity = 0;
+                let lastX = 0;
+                let lastTime = 0;
 
-                window.addEventListener('scroll', () => {
-                    const scrolled = window.scrollY;
-                    if (scrolled < window.innerHeight * 1.5) {
-                        title.style.transform = `translateY(${scrolled * 0.15}px)`;
-                        tag.style.transform = `translateY(${scrolled * 0.05}px)`;
-                        sub.style.transform = `translateY(${scrolled * 0.1}px)`;
-                        emotional.style.transform = `translateY(${scrolled * 0.12}px)`;
+                const handleScroll = () => {
+                    if (rail.scrollLeft > 50) {
+                        hint.style.opacity = '0';
+                        hint.style.transform = 'translateX(20px)';
+                    } else {
+                        hint.style.opacity = '0.6';
+                        hint.style.transform = 'translateX(0)';
                     }
-                }, { passive: true });
-            }
-
-            initAutoSlide() {
-                this.slideInterval = null;
-                this.isUserScrolling = false;
-                this.userScrollTimeout = null;
-
-                const startAutoSlide = () => {
-                    this.slideInterval = setInterval(() => {
-                        if (this.isUserScrolling) return;
-
-                        const items = this.rail.querySelectorAll('.rail-item');
-                        const activeItem = this.rail.querySelector('.rail-item.is-active');
-                        let nextIndex = Array.from(items).indexOf(activeItem) + 1;
-                        
-                        if (nextIndex >= items.length) nextIndex = 0;
-                        
-                        const target = items[nextIndex];
-                        this.rail.scrollTo({
-                            left: target.offsetLeft - (this.rail.offsetWidth - target.offsetWidth) / 2,
-                            behavior: 'smooth'
-                        });
-                    }, 5000);
                 };
 
-                const stopAutoSlide = () => {
-                    clearInterval(this.slideInterval);
-                };
+                rail.addEventListener('scroll', handleScroll, { passive: true });
 
-                this.rail.addEventListener('touchstart', () => {
-                    this.isUserScrolling = true;
-                    clearTimeout(this.userScrollTimeout);
+                rail.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    rail.classList.add('active');
+                    startX = e.pageX - rail.offsetLeft;
+                    scrollLeft = rail.scrollLeft;
+                    velocity = 0;
+                    lastX = e.pageX;
+                    lastTime = Date.now();
                 });
 
-                this.rail.addEventListener('touchend', () => {
-                    this.userScrollTimeout = setTimeout(() => {
-                        this.isUserScrolling = false;
-                    }, 3000);
+                rail.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    rail.classList.remove('active');
+                    this.applyMomentum(rail, velocity);
                 });
 
-                this.rail.addEventListener('mousedown', () => {
-                    this.isUserScrolling = true;
-                    clearTimeout(this.userScrollTimeout);
+                rail.addEventListener('mouseup', () => {
+                   isDown = false;
+                   rail.classList.remove('active');
+                   this.applyMomentum(rail, velocity);
                 });
 
-                window.addEventListener('mouseup', () => {
-                    this.userScrollTimeout = setTimeout(() => {
-                        this.isUserScrolling = false;
-                    }, 3000);
-                });
+                rail.addEventListener('mousemove', (e) => {
+                    if(!isDown) return;
+                    const x = e.pageX - rail.offsetLeft;
+                    const walk = (x - startX) * 1.5;
+                    rail.scrollLeft = scrollLeft - walk;
 
-                startAutoSlide();
-            }
-
-            initEntrance() {
-                this.enterBtn.addEventListener('click', () => {
-                    this.entrance.classList.add('is-hidden');
-                    this.mainContent.classList.add('is-ready');
-                    document.body.classList.add('is-unlocked');
-                    
-                    // Smoothly scroll to content
-                    setTimeout(() => {
-                        window.scrollTo({
-                            top: window.innerHeight * 0.5,
-                            behavior: 'smooth'
-                        });
-                    }, 500);
-                });
-            }
-
-            initAudio() {
-                // Generate Waveform Bars
-                for (let i = 0; i < 30; i++) {
-                    const bar = document.createElement('div');
-                    bar.className = 'wave-bar';
-                    bar.style.animationDelay = `${Math.random() * 0.5}s`;
-                    this.waveform.appendChild(bar);
-                }
-
-                this.playBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.toggleAudio();
-                });
-
-                document.querySelector('.play-overlay').addEventListener('click', () => {
-                    if (!this.audio.paused) {
-                        this.toggleAudio();
+                    const now = Date.now();
+                    const dt = now - lastTime;
+                    if (dt > 0) {
+                        velocity = (e.pageX - lastX) / dt;
                     }
-                });
-
-                this.audio.addEventListener('ended', () => {
-                    this.playBtn.classList.remove('is-faded');
-                    document.getElementById('playIcon').style.display = 'block';
-                    document.getElementById('pauseIcon').style.display = 'none';
-                    this.waveform.classList.remove('is-playing');
-                    document.querySelector('.play-overlay').classList.remove('is-active');
-                });
-
-                this.audio.addEventListener('timeupdate', () => {
-                    const perc = (this.audio.currentTime / this.audio.duration) * 100;
-                    this.progressBar.style.width = `${perc}%`;
-                });
-
-                this.progressWrap.addEventListener('click', (e) => {
-                    const rect = this.progressWrap.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const perc = x / rect.width;
-                    this.audio.currentTime = perc * this.audio.duration;
+                    lastX = e.pageX;
+                    lastTime = now;
                 });
             }
 
-            toggleAudio() {
-                const playOverlay = document.querySelector('.play-overlay');
-                if (this.audio.paused) {
-                    this.audio.play();
-                    this.playBtn.classList.add('is-faded');
-                    document.getElementById('playIcon').style.display = 'none';
-                    document.getElementById('pauseIcon').style.display = 'block';
-                    this.waveform.classList.add('is-playing');
-                    playOverlay.classList.add('is-active');
-                } else {
-                    this.audio.pause();
-                    this.playBtn.classList.remove('is-faded');
-                    document.getElementById('playIcon').style.display = 'block';
-                    document.getElementById('pauseIcon').style.display = 'none';
-                    this.waveform.classList.remove('is-playing');
-                    playOverlay.classList.remove('is-active');
-                }
-            }
-
-            initSlideshow() {
-                const items = this.rail.querySelectorAll('.rail-item');
-                const navContainer = document.getElementById('railNav');
-                
-                // Create Markers
-                items.forEach((_, i) => {
-                    const marker = document.createElement('div');
-                    marker.className = 'marker-track';
-                    marker.innerHTML = '<div class="marker-fill"></div>';
-                    navContainer.appendChild(marker);
-                });
-
-                const markers = navContainer.querySelectorAll('.marker-track');
-
-                // Active State Observer
-                const observerOptions = {
-                    root: this.rail,
-                    threshold: 0.6
+            applyMomentum(rail, vel) {
+                if (Math.abs(vel) < 0.2) return;
+                const decay = 0.95;
+                const step = () => {
+                    rail.scrollLeft -= vel * 16;
+                    vel *= decay;
+                    if (Math.abs(vel) > 0.1) {
+                        requestAnimationFrame(step);
+                    }
                 };
-
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            items.forEach(item => item.classList.remove('is-active'));
-                            entry.target.classList.add('is-active');
-                            
-                            const index = Array.from(items).indexOf(entry.target);
-                            markers.forEach((m, mi) => {
-                                m.classList.toggle('is-active', mi === index);
-                            });
-                        }
-                    });
-                }, observerOptions);
-
-                items.forEach(item => observer.observe(item));
-
-                // Horizontal Parallax / Image Float
-                this.rail.addEventListener('scroll', () => {
-                    const scrollLeft = this.rail.scrollLeft;
-                    items.forEach((item, i) => {
-                        const img = item.querySelector('img');
-                        if (img) {
-                            const rect = item.getBoundingClientRect();
-                            const offset = (rect.left - window.innerWidth / 2) * 0.1;
-                            img.style.transform = `translateX(${offset}px) scale(1.1)`;
-                        }
-                    });
-                }, { passive: true });
+                requestAnimationFrame(step);
             }
 
-            initRevealObserver() {
+            observeReveal(el) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.2 });
+                }, { threshold: 0.1 });
+                observer.observe(el);
+            }
 
-                observer.observe(this.closingQuote);
+            initParallax() {
+                const ambientText = document.querySelector('.ambient-text');
+                window.addEventListener('scroll', () => {
+                    const scroll = window.pageYOffset;
+                    const vh = window.innerHeight;
+                    
+                    if (ambientText) {
+                        ambientText.style.transform = `translate(-50%, calc(-50% + ${scroll * 0.1}px))`;
+                    }
+
+                    this.cards.forEach((card, i) => {
+                        const rect = card.getBoundingClientRect();
+                        const centerDiff = Math.abs((rect.top + rect.height/2) - vh/2);
+                        
+                        // Focus Logic
+                        if (centerDiff < vh * 0.3) {
+                            card.classList.add('is-focused');
+                        } else {
+                            card.classList.remove('is-focused');
+                        }
+
+                        // Parallax
+                        const speed = 0.02 + (i % 3) * 0.01;
+                        const offset = (vh / 2 - rect.top) * speed;
+                        card.style.setProperty('--parallax-offset', `${offset}px`);
+                    });
+                }, { passive: true });
+            }
+
+            animate() {
+                const time = Date.now() * 0.001;
+                this.cards.forEach((card, i) => {
+                    const seed = i * 1.5;
+                    const floatY = Math.sin(time + seed) * 4;
+                    const floatX = Math.cos(time * 0.7 + seed) * 2;
+                    const parallax = parseFloat(card.style.getPropertyValue('--parallax-offset')) || 0;
+                    
+                    card.style.transform = `translate(${floatX}px, ${parallax + floatY}px)`;
+                });
+                requestAnimationFrame(() => this.animate());
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            new BirthdayMemory();
+            new MemoryArchive();
+            
+            const statusText = document.querySelector('.status-text');
+            const phases = [
+                'some memories never leave',
+                'held softly between moments',
+                'for the days we wanted to keep',
+                'fragments of something beautiful'
+            ];
+            let phaseIdx = 0;
+            
+            setInterval(() => {
+                phaseIdx = (phaseIdx + 1) % phases.length;
+                statusText.style.opacity = '0';
+                setTimeout(() => {
+                    statusText.innerText = phases[phaseIdx];
+                    statusText.style.opacity = '1';
+                }, 500);
+            }, 4000);
         });
     </script>
 </body>
